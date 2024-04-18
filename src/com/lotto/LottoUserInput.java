@@ -5,10 +5,10 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.InputMismatchException;
 
-public class LottoUserInput {
-    private Scanner scanner;
-    
+public class LottoUserInput {		
     public Set<Integer> getUserInput() {
+    	Scanner scanner = new  Scanner(System.in);
+    	
         Set<Integer> inputNumbers = new TreeSet<>();
         System.out.println("로또 번호를 6개 입력해주세요.(숫자범위:1~45)");
 
