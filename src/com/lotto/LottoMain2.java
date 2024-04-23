@@ -7,33 +7,29 @@ import java.util.Random;
 import java.util.Scanner;
 
 /*
- 1. 기능에 따라 method를 나눴지만 OOP를 위해서는 LottoMain 클래스에서 각 기능별로 메소드화가 아니라 클래스화 해줄 필요가 있습니다.
-  	이를 위해서는 OOP의 다섯원칙인 SOLID원칙 중 제 1원칙인 단일책임원칙(SRP)원칙을 지켜야 합니다. 클래스화 하기전 우선 보이는 문제점을 찾아 봅시다.
- 2. main 클래스에서 scanner, random, array를 인스턴스화해서 parameter로 보내는것 보다 각 기능을 담당하는 클래스에서 처리하게 할 수 있을것 같습니다.
- 3. showResult 클래스는 결과만 출력하지 않고 등수계산 기능도 가지고 있습니다. 이를 분리하여 등수계산, 결과출력 클래스로 나눠 볼 수 있을것 같습니다.
+ 1. 기능에 따라 method 를 만들었지만 클래스로 나누기전에 OOP의 다섯원칙인 SOLID원칙 중 제 1원칙인 단일책임원칙(SRP)원칙을 지켜야 합니다.
+    showResult 클래스는 결과만 출력하지 않고 등수계산 기능도 가지고 있습니다. 이를 분리하여 등수계산, 결과출력 클래스로 나눠 볼 수 있을것 같습니다.
+ 2. main 클래스에서 array 를 인스턴스화해서 parameter로 보내는것 보다 각 기능을 담당하는 메소드에서 처리하고 반환하는게 날것 같습니다. 
 */
 public class LottoMain2 {
 	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		Random rand = new Random();
-
 		List<Integer> lottoNumArr = new ArrayList<Integer>(6);
 		List<Integer> inputNumArr = new ArrayList<Integer>(6);
 		
-		generateLottoNumbers(rand, lottoNumArr);
-		inputNumbers(sc, inputNumArr);
+		generateLottoNumbers(lottoNumArr);
+		inputNumbers(inputNumArr);
 		
 		// 출력을 정렬
 		Collections.sort(lottoNumArr); 
 		Collections.sort(inputNumArr); 
 		
 		int matchCount = compareNumbers(lottoNumArr, inputNumArr);
-		showResult(lottoNumArr, inputNumArr, matchCount);
-
-		sc.close();
+		showResult(lottoNumArr, inputNumArr, matchCount);	
 	}
 
-	private static void generateLottoNumbers(Random rand, List<Integer> lottoNumArr) {
+	private static void generateLottoNumbers(List<Integer> lottoNumArr) {
+		Random rand = new Random();
+		
 		// 로또넘버 생성 중복없을시 lottoNumArr 배열에 넣기
 		while (lottoNumArr.size() < 6) {
 			int randomNumber = rand.nextInt(45) + 1; // 45까지 랜덤숫자 생성
@@ -42,19 +38,22 @@ public class LottoMain2 {
 		}
 	}
 
-	private static void inputNumbers(Scanner sc, List<Integer> inputNumArr) {
+	private static void inputNumbers(List<Integer> inputNumArr) {
+		Scanner sc = new Scanner(System.in);
+		
 		// 유저에게 입력 받은 로또 정보 inputNumArr 배열에 넣기
 		System.out.println("로또 번호를 입력하세요(숫자범위:1~45)");
 		while (inputNumArr.size() < 6) {
 			int inputNumber = sc.nextInt();
 			if (inputNumber < 1 || inputNumber > 45) {
 				System.out.println("1부터 45사이의 숫자를 입력해주세요.");
-			} else if (inputNumArr.contains(inputNumArr)) {
+			} else if (inputNumArr.contains(inputNumber)) {
 				System.out.println("이미 입력된 번호입니다. 다른 번호를 입력하세요.");
 			} else {
 				inputNumArr.add(inputNumber);
 			}
 		}
+		sc.close();
 	}
 
 	private static int compareNumbers(List<Integer> lottoNumArr, List<Integer> inputNumArr) {
@@ -70,12 +69,11 @@ public class LottoMain2 {
 
 	private static void showResult(List<Integer> lottoNumArr, List<Integer> inputNumArr, int matchCount) {
 		// 맞힌 숫자와 몇등인지 출력
-		String resultMsg = "";		
 		System.out.println("생성된 로또 번호: " + lottoNumArr);
 		System.out.println("입력한 번호: " + inputNumArr);
 		System.out.println("맞힌 번호의 개수: " + matchCount);
-		System.out.println("결과 : " + resultMsg);
-
+		
+		String resultMsg;
 		// 등수 출력
 		switch (matchCount) {
 		case 6:
@@ -94,6 +92,7 @@ public class LottoMain2 {
 			resultMsg = "당첨되지 않았습니다.";
 			break;
 		}
+		System.out.println("결과 : " + resultMsg);
 	}
 	
 }

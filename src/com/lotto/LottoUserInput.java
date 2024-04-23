@@ -25,7 +25,6 @@ public class LottoUserInput {
             } catch (InputMismatchException ime) {
                 System.out.println("유효한 숫자를 입력해주세요. 문자나 특수 문자는 허용되지 않습니다.");
                 scanner.next();  // 현재 라인 지우고 다음 입력 대기
-                System.out.println();
             }
         }
         scanner.close();
