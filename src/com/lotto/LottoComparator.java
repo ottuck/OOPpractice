@@ -21,20 +21,21 @@ public class LottoComparator {
         }
     }
 	
-//	public int compare(Set<Integer> lottoNumbers, Set<Integer> userNumbers) {
-//	        int matchCount = 0;
-//	        for (int number : userNumbers) {
-//	            if (lottoNumbers.contains(number)) {
-//	                matchCount++;
-//	            }
-//	        }
-//	        return matchCount;
-//	    }
 	private int compare(Set<Integer> lottoNumbers, Set<Integer> userNumbers) {
-	    return (int) userNumbers.stream()     
-	                            .filter(lottoNumbers::contains) 
-	                            .count();                        
-	}
+	        int matchCount = 0;
+	        for (int number : userNumbers) {
+	            if (lottoNumbers.contains(number)) {
+	                matchCount++;
+	            }
+	        }
+	        return matchCount;
+	    }
+	
+//	private int compare(Set<Integer> lottoNumbers, Set<Integer> userNumbers) {
+//	    return (int) userNumbers.stream()     
+//	                            .filter(lottoNumbers::contains) 
+//	                            .count();                        
+//	}
 
 	public Result determineResult(Set<Integer> lottoNumbers, Set<Integer> userNumbers) {
         int matchCount = compare(lottoNumbers, userNumbers);
