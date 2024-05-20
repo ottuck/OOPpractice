@@ -9,7 +9,7 @@ package com.lotto;
 */
 public class LottoMain3 {
 	public static void main(String[] args) {
-		LottoGame game = LottoGameFactory.createLottoGame(2);	//사용할 디스플레이 번호 입력
+		LottoGame game = LottoGameFactory.createLottoGame(1);	//사용할 디스플레이 번호 입력
 		game.playLotto();
 	}
 }

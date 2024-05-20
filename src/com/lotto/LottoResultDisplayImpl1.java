@@ -4,7 +4,7 @@ import java.util.Set;
 
 import com.lotto.LottoComparator.Result;
 
-public class LottoResultDisplay1 implements LottoResultDisplayImp {
+public class LottoResultDisplayImpl1 implements LottoResultDisplay {
     @Override
 	public void showResult(Set<Integer> lottoNumbers, Set<Integer> userNumbers, Result result) {
         System.out.println("생성된 로또 번호: " + lottoNumbers);

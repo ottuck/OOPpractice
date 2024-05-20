@@ -8,11 +8,11 @@ public class LottoGame {
 	private final LottoNumberGenerator generator;
 	private final LottoUserInput userInput;
 	private final LottoComparator comparator;
-	private final LottoResultDisplayImp display;
+	private final LottoResultDisplay display;
 
 	// 생성자를 통해 의존성 주입(서브클래스에서 객체를 생성하게하는 심플 팩토리 패턴)
 	public LottoGame(LottoNumberGenerator generator, LottoUserInput userInput, LottoComparator comparator,
-			LottoResultDisplayImp display) {
+			LottoResultDisplay display) {
 		this.generator = generator;
 		this.userInput = userInput;
 		this.comparator = comparator;
